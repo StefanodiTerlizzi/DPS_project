@@ -1,0 +1,28 @@
+package cleaningRobot;
+
+service CleaningRobotServer {
+  rpc presentRobot(Robot) returns (Response) {}
+  rpc handleMaintenance(IdTimestamp) returns (Response) {}
+  rpc updateNetwork(listOfUnreachableRobots) returns(Response) {}
+}
+
+message listOfUnreachableRobots {
+  repeated int32 id = 1;
+}
+
+message Robot {
+  required int32 id = 1;
+  required int32 listeningPort = 2;
+  required string localAddress = 3;
+  required int32 positionRow = 4;
+  required int32 positionCol = 5;
+}
+
+message IdTimestamp {
+  required int32 id = 1;
+  required int64 timestamp = 2;
+}
+
+message Response {
+  required bool ok = 1;
+}
